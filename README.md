@@ -9,3 +9,17 @@
 ## 환경 구성 순서
 1. STS에서 Java Project로 생성
 2. Gradle init -> application
+
+## 제약사항
+- SRP(Single Responsibility Principle) : 단일 책임의 원칙
+    - 클래스는 오직 책임이 하나여야 한다.
+    - 이는 요구사항이 변경되었을 때에는 변경 요인이 하나여야 한다는 의미이다.
+- OCP(Open-Closed Principle) : 개방 폐쇄의 원칙
+    - 클래스는 확장에는 열려있지만, 수정에는 닫혀있어야 한다.
+- LSP(Liskov Substitution Principle) : 리스코프 치환 원칙
+    - SubClass는 SuperClass가 사용되는 곳에 대체 될 수 있어야 한다.
+- ISP(Interface Segregation Principle) : 인터페이스 분리의 원칙
+    - Interface는 구현 스펙을 정의한다.
+    - 이를 분리하라는 것은 거대한 클래스(Large Class)가 있다면, 그것을 쪼개라는 뜻이다.
+- DIP(Dependency Inversion Principle) : 의존관계 역전의 원칙
+    - 구현에 의존하기 보다는 인터페이스에 의존 하도록 코딩한다.
