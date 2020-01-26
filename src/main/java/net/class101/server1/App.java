@@ -3,12 +3,47 @@
  */
 package net.class101.server1;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import java.util.Scanner;
 
+import net.class101.server1.constant.Constant.UserActionCode;
+import net.class101.server1.view.MainView;
+import net.class101.server1.view.OrderView;
+
+public class App {
+	
+	private static MainView mainView = new MainView();
+	private static OrderView orderView = new OrderView();
+	
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    	Scanner scanner = new Scanner(System.in);
+		scanner.useDelimiter(System.lineSeparator());
+		
+    	while (true) {
+    		mainView.showOrderOrQuit();
+    		
+            String action = scanner.next();
+            
+            if (UserActionCode.ORDER.equals(action)) {
+            	mainView.showProducts();
+            	System.out.println("");
+            	
+            	orderView.showOrder(scanner);
+            	
+            	mainView.showBasket();
+            	
+            	mainView.showPayment();
+            	
+            	System.out.println("");
+    		} else if (UserActionCode.QUIT.equals(action)) {
+    			System.out.print("고객님의 주문 감사합니다.");
+    			break;
+    		} else {
+
+    		}
+            
+		}
+    	
+    	scanner.close();
+        
     }
 }
