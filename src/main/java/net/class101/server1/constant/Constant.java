@@ -10,6 +10,7 @@ public interface Constant {
 	public interface DefaultValue {
 		public static final long AMOUNT_INF = 99999;
 		public static final long DELIVERY_FEE = 5000;
+		public static final String USER_ID = "user1";
 	}
 	
 	public interface UserActionCode {

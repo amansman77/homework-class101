@@ -2,16 +2,24 @@ package net.class101.server1.entity;
 
 public class ProductBasket {
 
+	private String userId;
 	private Product product;
 	private long amount;
 	
 	public ProductBasket() {
 	}
-	public ProductBasket(Product product, long amount) {
+	public ProductBasket(String userId, Product product, long amount) {
+		this.userId = userId;
 		this.product = product;
 		this.amount = amount;
 	}
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public Product getProduct() {
 		return product;
 	}

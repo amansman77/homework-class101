@@ -40,8 +40,8 @@ public class MainView {
 			System.out.println(productBasket.getProduct().getTitle() + " - " + productBasket.getAmount() + "개");
 		}
 		System.out.println("-----------------------------------------------");
-		System.out.println("주문금액: " + ViewUtil.priceFormat(productBasketRepository.sumAllPrice()));
-		if (productBasketRepository.hasDeliveryFee()) {
+		System.out.println("주문금액: " + ViewUtil.priceFormat(productBasketRepository.sumPriceByUserId(DefaultValue.USER_ID)));
+		if (productBasketRepository.hasDeliveryFee(DefaultValue.USER_ID)) {
 			System.out.println("베송비: " + ViewUtil.priceFormat(DefaultValue.DELIVERY_FEE));
 		}
 		System.out.println("-----------------------------------------------");
@@ -51,7 +51,7 @@ public class MainView {
 		System.out.println("지불금액: " + ViewUtil.priceFormat(paymentService.getTotalPrice()));
 		System.out.println("-----------------------------------------------");
 		
-		paymentService.processPayment();
+		paymentService.processPayment("user1");
 	}
 
 }

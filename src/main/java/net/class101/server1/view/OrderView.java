@@ -29,7 +29,7 @@ public class OrderView {
         	long selectAmount = scanner.nextLong();
         	
         	Product product = productRepository.findByProductNumber(selectProductNumber);
-        	tempOrderProducts.add(new ProductBasket(product, selectAmount));
+        	tempOrderProducts.add(new ProductBasket("user1", product, selectAmount));
 		}
 		productBasketRepository.save(tempOrderProducts);
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import net.class101.server1.constant.Constant.DefaultValue;
 import net.class101.server1.constant.Constant.TypeCode;
 import net.class101.server1.entity.ProductBasket;
 import net.class101.server1.entity.UserKlass;
@@ -28,12 +29,12 @@ public class PaymentService {
     }
     
 	public long getTotalPrice() {
-		return productBasketRepository.sumAllPrice()
-				+ (productBasketRepository.hasDeliveryFee()?5000:0);
+		return productBasketRepository.sumPriceByUserId(DefaultValue.USER_ID)
+				+ (productBasketRepository.hasDeliveryFee(DefaultValue.USER_ID)?5000:0);
 	}
 
-	synchronized public void processPayment() throws SoldOutException, HasKlassException {
-		List<ProductBasket> findProductBaskets = productBasketRepository.findAll();
+	public synchronized void processPayment(String userId) throws SoldOutException, HasKlassException {
+		List<ProductBasket> findProductBaskets = productBasketRepository.findByUserId(userId);
 		
 		Set<Long> klassProductsSn = findProductBaskets.stream()
 			.filter(p -> TypeCode.KLASS.equals(p.getProduct().getType()))
@@ -61,7 +62,7 @@ public class PaymentService {
 			}
 		}
 		
-		productBasketRepository.deleteAll();
+		productBasketRepository.deleteByUserId(userId);
 	}
 	
 }

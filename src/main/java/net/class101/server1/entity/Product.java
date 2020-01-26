@@ -49,5 +49,5 @@ public class Product {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
-	
+
 }
