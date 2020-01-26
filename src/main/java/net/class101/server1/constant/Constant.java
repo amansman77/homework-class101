@@ -3,7 +3,7 @@ package net.class101.server1.constant;
 public interface Constant {
 
 	public interface TypeCode {
-		public static final String CLASS = "클래스";
+		public static final String KLASS = "클래스";
 		public static final String KIT = "키트";
 	}
 	

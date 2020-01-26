@@ -29,7 +29,7 @@ public class ProductBasketRepository {
 	}
 	
 	public void save(List<ProductBasket> productBaskets) {
-		this.productBaskets = productBaskets;
+		this.productBaskets.addAll(productBaskets);
 		for (ProductBasket productBasket : productBaskets) {
 			totalPrice += (productBasket.getProduct().getPrice() * productBasket.getAmount());
 		}
