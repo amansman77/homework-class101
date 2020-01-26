@@ -6,6 +6,7 @@ import net.class101.server1.constant.Constant.DefaultValue;
 import net.class101.server1.constant.Constant.UserActionCode;
 import net.class101.server1.entity.Product;
 import net.class101.server1.entity.ProductBasket;
+import net.class101.server1.exception.SoldOutException;
 import net.class101.server1.repository.ProductBasketRepository;
 import net.class101.server1.repository.ProductRepository;
 import net.class101.server1.service.PaymentService;
@@ -45,11 +46,11 @@ public class MainView {
 		System.out.println("-----------------------------------------------");
 	}
 
-	public void showPayment() {
-		paymentService.processPayment();
-		
+	public void showPayment() throws SoldOutException {
 		System.out.println("지불금액: " + ViewUtil.priceFormat(paymentService.getTotalPrice()));
 		System.out.println("-----------------------------------------------");
+		
+		paymentService.processPayment();
 	}
 
 }

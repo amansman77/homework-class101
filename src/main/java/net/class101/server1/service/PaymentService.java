@@ -1,11 +1,13 @@
 package net.class101.server1.service;
 
+import java.util.List;
+
+import net.class101.server1.entity.ProductBasket;
+import net.class101.server1.exception.SoldOutException;
 import net.class101.server1.repository.ProductBasketRepository;
-import net.class101.server1.repository.ProductRepository;
 
 public class PaymentService {
 
-	private ProductRepository productRepository = ProductRepository.getInstance();
 	private ProductBasketRepository productBasketRepository = ProductBasketRepository.getInstance();
 	
 	private PaymentService(){}
@@ -23,7 +25,21 @@ public class PaymentService {
 				+ (productBasketRepository.hasDeliveryFee()?5000:0);
 	}
 
-	public void processPayment() {
+	synchronized public void processPayment() throws SoldOutException {
+		List<ProductBasket> findProductBaskets = productBasketRepository.findAll();
+		for (ProductBasket productBasket : findProductBaskets) {
+			if (productBasket.getAmount() > productBasket.getProduct().getAmount()) {
+				throw new SoldOutException();
+			}
+		}
+		
+		for (ProductBasket productBasket : findProductBaskets) {
+			productBasket.getProduct().setAmount(
+					productBasket.getProduct().getAmount() - productBasket.getAmount()
+					);
+		}
+		
+		productBasketRepository.deleteAll();
 	}
 	
 }
