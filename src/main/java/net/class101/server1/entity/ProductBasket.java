@@ -1,13 +1,13 @@
-package net.class101.server1;
+package net.class101.server1.entity;
 
-public class OrderProduct {
+public class ProductBasket {
 
 	private Product product;
 	private long amount;
 	
-	public OrderProduct() {
+	public ProductBasket() {
 	}
-	public OrderProduct(Product product, long amount) {
+	public ProductBasket(Product product, long amount) {
 		this.product = product;
 		this.amount = amount;
 	}

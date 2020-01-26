@@ -1,4 +1,4 @@
-package net.class101.server1;
+package net.class101.server1.entity;
 
 public class Product {
 

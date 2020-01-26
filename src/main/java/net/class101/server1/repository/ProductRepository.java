@@ -1,14 +1,15 @@
-package net.class101.server1;
+package net.class101.server1.repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import net.class101.server1.constant.Constant.DefaultValue;
 import net.class101.server1.constant.Constant.TypeCode;
+import net.class101.server1.entity.Product;
 
-public class ProductManager {
+public class ProductRepository {
 
-	private static final List<Product> products = List.of(
+	private List<Product> products = List.of(
 			new Product(1, "16374", TypeCode.CLASS, "스마트스토어로 월 100만원 만들기, 평범한 사람이 돈을 만드는 비법", 151950, DefaultValue.AMOUNT_INF)
 			, new Product(2, "26825", TypeCode.CLASS, "해금, 특별하고 아름다운 나만의 반려악기", 114500, DefaultValue.AMOUNT_INF)
 			, new Product(3, "65625", TypeCode.CLASS, "일상에 따뜻한 숨결을 불어넣어요, 반지수와 함께하는 아이패트 드로잉", 174500, DefaultValue.AMOUNT_INF)
@@ -31,7 +32,17 @@ public class ProductManager {
 			, new Product(20, "28448", TypeCode.CLASS, "당신도 할 수 있다! 베테랑 실무자가 알려주는 모션그래픽의 모든 것", 152200, DefaultValue.AMOUNT_INF)
 			);
 
-	public List<Product> getProducts() {
+	private ProductRepository(){}
+	
+	private static class SingleTonHolder{
+        private static final ProductRepository instance = new ProductRepository();
+    }
+     
+    public static ProductRepository getInstance(){
+        return SingleTonHolder.instance;
+    }
+    
+	public List<Product> findAll() {
 		return products;
 	}
 
