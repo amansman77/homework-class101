@@ -17,19 +17,40 @@ import net.class101.server1.repository.ProductRepository;
 public class PaymentServiceTest {
 
 	@Test
-	public void testAsyncSoldOut() {
-		User1Thread user1Thread = new User1Thread();
-		Thread thread1 = new Thread(user1Thread, "첫번째 사용자");
-
-		thread1.start();
+	public void testGetTotalPrice_deliveryFee() {
+		ProductRepository productRepository = ProductRepository.getInstance();
+		ProductBasketRepository productBasketRepository = ProductBasketRepository.getInstance();
+		PaymentService paymentService = PaymentService.getInstance();
 		
-		User2Thread user2Thread = new User2Thread();
-		Thread thread2 = new Thread(user2Thread, "두번째 사용자");
-
-		thread2.start();
+		Product testProduct = productRepository.findByProductNumber("91008");
+		
+		productBasketRepository.save(List.of(
+				new ProductBasket("user1", testProduct, 1)
+				));
+		
+		assertEquals(28000+5000, paymentService.getTotalPrice());
+		
+		productBasketRepository.deleteByUserId("user1");
 	}
 	
-//	@Test(expected=SoldOutException.class)
+	@Test
+	public void testGetTotalPrice_noDeliveryFee() {
+		ProductRepository productRepository = ProductRepository.getInstance();
+		ProductBasketRepository productBasketRepository = ProductBasketRepository.getInstance();
+		PaymentService paymentService = PaymentService.getInstance();
+		
+		Product testProduct = productRepository.findByProductNumber("91008");
+		
+		productBasketRepository.save(List.of(
+				new ProductBasket("user1", testProduct, 2)
+				));
+		
+		assertEquals(28000*2, paymentService.getTotalPrice());
+		
+		productBasketRepository.deleteByUserId("user1");
+	}
+	
+	@Test(expected=SoldOutException.class)
 	public void testSoldOutException() throws SoldOutException {
 		ProductRepository productRepository = ProductRepository.getInstance();
 		ProductBasketRepository productBasketRepository = ProductBasketRepository.getInstance();
@@ -49,9 +70,7 @@ public class PaymentServiceTest {
 		
 		// 사용자1, 결제
 		try {
-			System.out.println("user3 결재 : " + testProduct.getNumber());
 			paymentService.processPayment("user3");
-			System.out.println("user3 결재 완료 : " + testProduct.getNumber());
 		} catch (SoldOutException e) {
 			fail("SoldOutException is not expected");
 		} catch (HasKlassException e) {

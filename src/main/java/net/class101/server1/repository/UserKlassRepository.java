@@ -25,6 +25,10 @@ public class UserKlassRepository {
 		userKlasses.add(userKlass);
 	}
 
+	public void save(List<UserKlass> userKlasses) {
+		this.userKlasses.addAll(userKlasses);
+	}
+
 	public List<UserKlass> findAll() {
 		return userKlasses;
 	}
@@ -33,6 +37,10 @@ public class UserKlassRepository {
 		return userKlasses.stream()
 				.filter(k -> productsSn.contains(k.getProduct().getSn()))
 				.collect(Collectors.toList());
+	}
+
+	public void deleteAll() {
+		userKlasses.clear();
 	}
     
 }
