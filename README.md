@@ -23,6 +23,8 @@
     - 이를 분리하라는 것은 거대한 클래스(Large Class)가 있다면, 그것을 쪼개라는 뜻이다.
 - DIP(Dependency Inversion Principle) : 의존관계 역전의 원칙
     - 구현에 의존하기 보다는 인터페이스에 의존 하도록 코딩한다.
+- 참고 자료
+    - [객체지향 개발 5대 원리: SOLID - Nextree](http://www.nextree.co.kr/p6960/)
     
 ## 요구사항 검증
 1. 구현
