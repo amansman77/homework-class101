@@ -25,6 +25,7 @@
     - 구현에 의존하기 보다는 인터페이스에 의존 하도록 코딩한다.
 - 참고 자료
     - [객체지향 개발 5대 원리: SOLID - Nextree](http://www.nextree.co.kr/p6960/)
+    - [객체 지향 프로그래밍/원칙 - 나무위키](https://namu.wiki/w/%EA%B0%9D%EC%B2%B4%20%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/%EC%9B%90%EC%B9%99)
     
 ## 요구사항 검증
 1. 구현
